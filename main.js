@@ -14,6 +14,7 @@ let letraschutadas = [];
 let pontuacao = 1000;
 let gamestatus = false;
 let timer;
+let erros = 0;
 
 
 async function getPalavra() {
@@ -62,13 +63,10 @@ function chutar() {
     }
     if (palavra.palavra === document.getElementById("entrada").value) {
         document.getElementById("entrada").value = "";
-        console.log("Acertou");
         mostrarResultadoSucesso();
         endGame();
         viewStart();
-        document.getElementsByClassName("keyboard")[0].classList.add("keyboard--hidden");;
     } else {
-        console.log("Errou");
         document.getElementById("entrada").value = "";
     }
 }
@@ -90,9 +88,14 @@ function chutarLetra(letra) {
         console.log("Letra ja chutada!");
     } else {
         letraschutadas.push(letra);
+        localStorage.setItem('letraschutadas', letraschutadas);
         document.getElementById("letra-chutada").innerHTML += letra;
         let palavraArray = Array.from(palavra.palavra);
-        temLetraNoArray(letra, palavraArray);
+        if (!temLetraNoArray(letra, palavraArray)) {
+            erros = erros + 1;
+            localStorage.setItem('erros', erros);
+            mostrarBoneco();
+        }
     }
 }
 
@@ -110,7 +113,6 @@ function temLetraNoArray(letra, array) {
             pontuacao += 100;
             let chuteatual = palavrachute.toString().split(',').join('');
             localStorage.setItem('chutes', JSON.stringify(chutes));
-            localStorage.setItem('letraschutadas', letraschutadas);
             if (chuteatual == palavra.palavra) {
                 //console.log("ACABOU");
                 mostrarResultadoSucesso();
@@ -143,7 +145,12 @@ function viewStart() {
     document.getElementById("btn-iniciar").innerText = "Iniciar"
     document.getElementById("letra-chutada").innerHTML = "";
     document.getElementById("div-pontuacao").style.display = "none";
-
+    document.getElementsByClassName("cabeca")[0].style.display = "none";
+    document.getElementsByClassName("corpo")[0].style.display = "none";
+    document.getElementsByClassName("b-direito")[0].style.display = "none";
+    document.getElementsByClassName("b-esquerdo")[0].style.display = "none";
+    document.getElementsByClassName("p-esquerda")[0].style.display = "none"
+    document.getElementsByClassName("p-direita")[0].style.display = "none";
 }
 
 
@@ -159,6 +166,7 @@ function endGame() {
     letraschutadas = [];
     gamestatus = false;
     pontuacao = 1000;
+    erros = 0;
 }
 
 function mostrarResultadoSucesso() {
@@ -167,6 +175,55 @@ function mostrarResultadoSucesso() {
         pontuacao.toString() + ' Pontos!',
         'success'
     )
+    document.getElementsByClassName("keyboard")[0].classList.add("keyboard--hidden");
+}
+
+function mostrarBoneco() {
+
+    switch (erros) {
+        case 1:
+            document.getElementsByClassName("cabeca")[0].style.display = "block";
+            break;
+        case 2:
+            document.getElementsByClassName("cabeca")[0].style.display = "block";
+            document.getElementsByClassName("corpo")[0].style.display = "block";
+            break;
+        case 3:
+            document.getElementsByClassName("cabeca")[0].style.display = "block";
+            document.getElementsByClassName("corpo")[0].style.display = "block";
+            document.getElementsByClassName("b-direito")[0].style.display = "block";
+            break;
+        case 4:
+            document.getElementsByClassName("cabeca")[0].style.display = "block";
+            document.getElementsByClassName("corpo")[0].style.display = "block";
+            document.getElementsByClassName("b-direito")[0].style.display = "block";
+            document.getElementsByClassName("b-esquerdo")[0].style.display = "block";
+            break;
+        case 5:
+            document.getElementsByClassName("cabeca")[0].style.display = "block";
+            document.getElementsByClassName("corpo")[0].style.display = "block";
+            document.getElementsByClassName("b-direito")[0].style.display = "block";
+            document.getElementsByClassName("b-esquerdo")[0].style.display = "block";
+            document.getElementsByClassName("p-esquerda")[0].style.display = "block";
+            break;
+        case 6:
+            document.getElementsByClassName("cabeca")[0].style.display = "block";
+            document.getElementsByClassName("corpo")[0].style.display = "block";
+            document.getElementsByClassName("b-direito")[0].style.display = "block";
+            document.getElementsByClassName("b-esquerdo")[0].style.display = "block";
+            document.getElementsByClassName("p-esquerda")[0].style.display = "block";
+            document.getElementsByClassName("p-direita")[0].style.display = "block";
+            break;
+        case 7:
+            Swal.fire(
+                'GAME OVER!',
+                'Seu ruim!',
+                'error'
+            )
+            document.getElementsByClassName("keyboard")[0].classList.add("keyboard--hidden");
+            endGame();
+            viewStart();
+    }
 }
 
 async function iniciarGame() {
@@ -187,6 +244,12 @@ async function iniciarGame() {
         if (localStorage.getItem("pontuacao")) {
             pontuacao = localStorage.getItem("pontuacao");
         }
+
+        if (localStorage.getItem("erros")) {
+            erros = parseInt(localStorage.getItem("erros"));
+            mostrarBoneco();
+        }
+
     } else {
         umapalavra = await getPalavra();
     }

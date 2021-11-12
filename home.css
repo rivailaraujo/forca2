@@ -69,6 +69,7 @@
 }
 
 .cabeca {
+    display: none;
     position: absolute;
     height: 90px;
     right: 36px;
@@ -76,6 +77,7 @@
 }
 
 .corpo {
+    display: none;
     position: absolute;
     height: 90px;
     right: 38px;
@@ -83,6 +85,7 @@
 }
 
 .b-direito {
+    display: none;
     position: absolute;
     height: 57px;
     right: 120px;
@@ -90,6 +93,7 @@
 }
 
 .b-esquerdo {
+    display: none;
     position: absolute;
     height: 58px;
     right: 20px;
@@ -97,6 +101,7 @@
 }
 
 .p-direita {
+    display: none;
     position: absolute;
     height: 66px;
     right: 85px;
@@ -104,6 +109,7 @@
 }
 
 .p-esquerda {
+    display: none;
     position: absolute;
     height: 57px;
     right: 47px;
