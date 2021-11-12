@@ -1,0 +1,111 @@
+.container {
+    display: flex;
+    height: 60px;
+    justify-content: center;
+}
+
+.principal {
+    margin-top: 145px;
+    margin-left: 220px;
+}
+
+.forca {
+
+    background-repeat: no-repeat;
+    min-width: 400px;
+    height: 350px;
+    background-size: 100% 100%;
+}
+
+.forca-relative {
+    position: relative;
+}
+
+.container-forca {
+    display: flex;
+    margin-top: 130px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 50vh;
+}
+
+@-moz-document url-prefix() {
+    .container-forca {
+        display: flex;
+        margin-top: 0px;
+        justify-content: left;
+        align-items: left;
+        text-align: center;
+        min-height: 50vh;
+    }
+}
+
+
+.palavra {
+    display: flex;
+    font-size: 45px;
+    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.palavra h1 {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.chutes {
+    display: none;
+    font-size: 28px;
+}
+
+.div-iniciar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.cabeca {
+    position: absolute;
+    height: 90px;
+    right: 36px;
+    top: 135px;
+}
+
+.corpo {
+    position: absolute;
+    height: 90px;
+    right: 38px;
+    top: 209px;
+}
+
+.b-direito {
+    position: absolute;
+    height: 57px;
+    right: 120px;
+    top: 232px;
+}
+
+.b-esquerdo {
+    position: absolute;
+    height: 58px;
+    right: 20px;
+    top: 231px;
+}
+
+.p-direita {
+    position: absolute;
+    height: 66px;
+    right: 85px;
+    top: 287px;
+}
+
+.p-esquerda {
+    position: absolute;
+    height: 57px;
+    right: 47px;
+    top: 290px;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="teclado.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title></title>
+</head>
+
+<body>
+    <div class="container-forca">
+        <div class="forca-relative">
+            <img class="forca" src="./imgs/forcabkg.png">
+            <div>
+                <img class="cabeca" src="./imgs/cabeca.png">
+                <img class="corpo" src="./imgs/corpo.png">
+                <img class="b-direito" src="./imgs/bracodireito.png">
+                <img class="b-esquerdo" src="./imgs/bracoesquerdo.png">
+                <img class="p-direita" src="./imgs/pernadireita.png">
+                <img class="p-esquerda" src="./imgs/pernaesquerda.png">
+            </div>
+
+        </div>
+        <div class="menus">
+            <div id="div-buttom-iniciar" class="div-iniciar">
+                <button id="btn-iniciar" class="w3-button w3-xxlarge w3-black w3-round-xxlarge">Iniciar</button>
+            </div>
+            <div id="div-p-iniciar" class="div-iniciar">
+                <div>
+                    <p>No console existe uma cola.</p>
+
+                </div>
+            </div>
+            <div class="palavra">
+                <div class="chutes" id="chutes">
+                    Chutes:
+                </div>
+            </div>
+            <div id="palavra" class="palavra">
+
+            </div>
+
+            <div id="input-chute" style="display: none;">
+                <input id="entrada" required="required" placeholder="Chute a palavra inteira..."
+                    onkeypress="return apenasLetras(event,this);" onkeyup="verificarCampo(this.value)">
+                <button id="btn-chutar" disabled onclick="chutar()">Chutar</button>
+            </div>
+
+            <div id="div-chutes" style="display: none;">
+                Letras Chutadas: <span id="letra-chutada"></span>
+            </div>
+
+            <div id="div-pontuacao" style="display: none;">
+                Pontuação: <span id="pontuacao"></span>
+            </div>
+
+
+
+        </div>
+
+        <div>
+            <div class="use-keyboard-input" style="position: absolute; top: 130px; right: 30px; width: 300px;"></div>
+        </div>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="./teclado.js"></script>
+        <script src="./main.js"></script>
+
+</body>
+
+</html>
