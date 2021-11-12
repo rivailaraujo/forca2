@@ -112,7 +112,8 @@ function temLetraNoArray(letra, array) {
             localStorage.setItem('chutes', JSON.stringify(chutes));
             localStorage.setItem('letraschutadas', letraschutadas);
             if (chuteatual == palavra.palavra) {
-                console.log("ACABOU")
+                //console.log("ACABOU");
+                mostrarResultadoSucesso();
                 endGame();
                 viewStart();
             }
