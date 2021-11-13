@@ -6,12 +6,26 @@ class Palavra {
         return this.palavra.length;
     }
 }
+class UsuarioData {
+    constructor(pontuacao) {
+        this.pontuacao = pontuacao;
+    }
+
+    getPontuacao() {
+        return this.pontuacao;
+    }
+
+    setPontuacao(pontuacao) {
+        this.pontuacao = pontuacao;
+    }
+
+}
 
 let palavra;
+let usuario;
 let palavrachute = [];
 let chutes = [];
 let letraschutadas = [];
-let pontuacao = 1000;
 let gamestatus = false;
 let timer;
 let erros = 0;
@@ -59,7 +73,7 @@ function apenasLetras(e, t) {
 function chutar() {
 
     if (document.getElementById("entrada").value == "") {
-        console.log("Vazio")
+        //console.log("Vazio")
     }
     if (palavra.palavra === document.getElementById("entrada").value) {
         document.getElementById("entrada").value = "";
@@ -110,7 +124,7 @@ function temLetraNoArray(letra, array) {
                 letra: letra
             });
             palavrachute[i] = letra;
-            pontuacao += 100;
+            usuario.setPontuacao(usuario.getPontuacao() + 100);
             let chuteatual = palavrachute.toString().split(',').join('');
             localStorage.setItem('chutes', JSON.stringify(chutes));
             if (chuteatual == palavra.palavra) {
@@ -165,14 +179,14 @@ function endGame() {
     chutes = [];
     letraschutadas = [];
     gamestatus = false;
-    pontuacao = 1000;
+    //pontuacao = 1000;
     erros = 0;
 }
 
 function mostrarResultadoSucesso() {
     Swal.fire(
         'Acertou!',
-        pontuacao.toString() + ' Pontos!',
+        usuario.getPontuacao().toString() + ' Pontos!',
         'success'
     )
     document.getElementsByClassName("keyboard")[0].classList.add("keyboard--hidden");
@@ -229,6 +243,7 @@ function mostrarBoneco() {
 async function iniciarGame() {
     viewGame();
     let umapalavra;
+    let pontuacao;
     if (localStorage.getItem("Palavra")) {
         umapalavra = localStorage.getItem("Palavra");
         if (localStorage.getItem("chutes")) {
@@ -252,10 +267,12 @@ async function iniciarGame() {
 
     } else {
         umapalavra = await getPalavra();
+        pontuacao = 1000;
     }
 
     localStorage.setItem("Palavra", umapalavra);
-    palavra = new Palavra(umapalavra.toLowerCase())
+    palavra = new Palavra(umapalavra.toLowerCase());
+    usuario = new UsuarioData(pontuacao);
     console.log(palavra.palavra)
     preencheEspaco(palavra.tamanho());
     if (chutes) {
@@ -268,12 +285,12 @@ async function iniciarGame() {
 
     timer = setInterval(() => {
         if (gamestatus == true && pontuacao > 0) {
-            pontuacao = pontuacao - 5;
-            localStorage.setItem('pontuacao', pontuacao);
+            usuario.setPontuacao(usuario.getPontuacao() - 5)
+            localStorage.setItem('pontuacao', usuario.getPontuacao());
         } else {
             paraPontuacao();
         }
-        document.getElementById("pontuacao").innerText = pontuacao;
+        document.getElementById("pontuacao").innerText = usuario.getPontuacao();
 
     }, 1000);
 }
