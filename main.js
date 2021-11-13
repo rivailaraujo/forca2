@@ -15,6 +15,10 @@ class UsuarioData {
         return this.pontuacao;
     }
 
+    static getPontuacaoMaxima() {
+        return localStorage.getItem('pontuacaoMaxima');
+    }
+
     setPontuacao(pontuacao) {
         this.pontuacao = pontuacao;
     }
